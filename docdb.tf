@@ -19,6 +19,15 @@ resource "aws_docdb_subnet_group" "docdb_sgbnet_group" {
   }
 }
 
-output "output_ref"{
-  value = data.terraform_remote_state.vpc
+# output "output_ref"{
+#   value = data.terraform_remote_state.vpc
+# }
+
+# Create instances needed for docdb cluster
+
+resource "aws_docdb_cluster_instance" "cluster_instances" {
+  count              = 1
+  identifier         = "robot-${var.ENV}-docdb-instance"
+  cluster_identifier = aws_docdb_cluster.default.id
+  instance_class     = "db.t3.medium"
 }
