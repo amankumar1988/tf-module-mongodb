@@ -28,6 +28,6 @@ resource "aws_docdb_subnet_group" "docdb_sgbnet_group" {
 resource "aws_docdb_cluster_instance" "cluster_instances" {
   count              = 1
   identifier         = "robot-${var.ENV}-docdb-instance"
-  cluster_identifier = aws_docdb_cluster.default.id
+  cluster_identifier = aws_docdb_cluster.docdb.id
   instance_class     = "db.t3.medium"
 }
