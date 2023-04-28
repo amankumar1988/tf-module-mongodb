@@ -1,5 +1,7 @@
 resource "null_resource" "schema" {
 
+  depends_on = [ aws.aws_docdb_cluster.docdb ]
+
   provisioner "local-exec" {
         command = <<EOF
         cd /tmp 
