@@ -9,3 +9,12 @@ data "terraform_remote_state" "vpc" {
     region = "us-east-1"
     }
   }
+
+
+data "aws_secretsmanager_secret" "secrets" {
+  name = roboshop/secrets
+}
+
+output "data"{
+  value = data.aws_secretsmanager_secret.secrets
+}
