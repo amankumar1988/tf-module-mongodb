@@ -1,8 +1,8 @@
 resource "aws_docdb_cluster" "docdb" {
   cluster_identifier      = "robot-${var.ENV}-docdb"
   engine                  = "docdb"
-  master_username         = "admin1"
-  master_password         = "roboshop1"
+  master_username         = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCDB_USERNAME"]
+  master_password         = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCDB_PASSWORD"]
   # backup_retention_period = 5       // Commenting this in lab we don't need it.
   # preferred_backup_window = "07:00-09:00"
   skip_final_snapshot     =   true
