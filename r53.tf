@@ -1,5 +1,4 @@
-# This creates CNAME record for mongodb
-
+# This created the CNAME Record for MongoDB
 resource "aws_route53_record" "mongodb" {
   zone_id = data.terraform_remote_state.vpc.outputs.PRIVATE_HOSTED_ZONE_ID
   name    = "mongodb-${var.ENV}"
@@ -8,5 +7,5 @@ resource "aws_route53_record" "mongodb" {
   records = [aws_docdb_cluster.docdb.endpoint]
 }
 
-# A record : Creating name to an IP add
-# C record : Creating name to name
+# A Record     : Creating Name to an IP Address
+# CNAME Record : Creating Name to a Name

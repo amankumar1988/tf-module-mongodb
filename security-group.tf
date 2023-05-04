@@ -1,12 +1,11 @@
-# Create security group
-
+# Creates Security Group 
 resource "aws_security_group" "allow_mongodb" {
-  name        = "robot-${var.ENV}-mongodb-sg"
-  description = "Allow Mongodb inbound traffic"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  name               = "robot-${var.ENV}-mongodb-sg"
+  description        = "Allows MongoDB Internal inbound traffic"
+  vpc_id             = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description      = "Allows docdb from local NW"
+    description      = "Allows docdb from local network"
     from_port        = var.DOCDB_PORT
     to_port          = var.DOCDB_PORT
     protocol         = "tcp"
@@ -14,12 +13,12 @@ resource "aws_security_group" "allow_mongodb" {
   }
 
   ingress {
-    description      = "Allows docdb from defaul NW"
+    description      = "Allows docdb from default network"
     from_port        = var.DOCDB_PORT
     to_port          = var.DOCDB_PORT
     protocol         = "tcp"
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
-  }  
+  }
 
   egress {
     from_port        = 0
